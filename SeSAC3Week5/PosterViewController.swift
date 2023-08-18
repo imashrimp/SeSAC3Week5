@@ -10,11 +10,6 @@ import Alamofire
 import SwiftyJSON
 import Kingfisher
 
-protocol CollectionViewAttributeProtocol {
-    func configureCollectionView()
-    func configureCollectionViewLayout()
-}
-
 class PosterViewController: UIViewController {
     
     var list: [Results] = []
