@@ -12,22 +12,22 @@ class SimiliarMovieCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var posterImageView: UIImageView!
     @IBOutlet var movieTitleLabel: UILabel!
-    @IBOutlet var releaseDateLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        posterImageView.contentMode = .scaleAspectFit
+        
         movieTitleLabel.font = .boldSystemFont(ofSize: 15)
         movieTitleLabel.textAlignment = .left
+        movieTitleLabel.numberOfLines = 0
         
-        releaseDateLabel.font = .systemFont(ofSize: 14)
-        releaseDateLabel.textAlignment = .left
+        self.layer.cornerRadius = 8
+        self.backgroundColor = UIColor(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1), alpha: 1)
         
     }
     
     func showCellContents(data: SimilarFilms) {
-        movieTitleLabel.text = data.title
-        releaseDateLabel.text = data.releaseDate
-        
+        movieTitleLabel.text = "제목: \(data.title)"
         guard let posterUrl = data.posterPath else {
             posterImageView.image = UIImage(systemName: "popcorn.fill")
             return

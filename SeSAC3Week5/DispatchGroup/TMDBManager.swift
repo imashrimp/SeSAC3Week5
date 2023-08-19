@@ -26,8 +26,7 @@ struct TMDBManager {
         AF.request(url, method: .get).validate()
             .responseDecodable(of: SimilarMovie.self) { response in
                 guard let value = response.value else {return}
-                dump(value)
+                completionHandler(value)
             }
-        
     }
 }

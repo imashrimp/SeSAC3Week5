@@ -31,3 +31,4 @@ extension UICollectionReusableView: ReusableProtocol {
         return String(describing: self)
     }
 }
+
