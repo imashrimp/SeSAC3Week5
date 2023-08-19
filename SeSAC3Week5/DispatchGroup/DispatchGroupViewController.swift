@@ -22,7 +22,7 @@ class DispatchGroupViewController: UIViewController {
         super.viewDidLoad()
         
         configureCollectionView()
-        configureCollectionViewLayout()
+        configureCollectionViewLayout(width: 300, height: 150)
         configureSegment()
 
         callRequest()
@@ -31,6 +31,12 @@ class DispatchGroupViewController: UIViewController {
     
     @IBAction func segmentTapped(_ sender: UISegmentedControl) {
         mode = similiarAndVideoSegment.titleForSegment(at: sender.selectedSegmentIndex)
+        print(mode)
+        if mode == Mode.similar.rawValue {
+            configureCollectionViewLayout(width: 300, height: 150)
+        } else {
+            configureCollectionViewLayout(width: 0, height: 0)
+        }
         self.collectionView.reloadSections([0])
     }
     
@@ -62,25 +68,40 @@ extension DispatchGroupViewController: UICollectionViewDelegate {
 extension DispatchGroupViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movieList?.similar.results.count ?? 0
+        
+        if mode == Mode.similar.rawValue {
+            return movieList?.similar.results.count ?? 0
+        } else {
+            return videoList?.videos.results.count ?? 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SimiliarMovieCollectionViewCell.identifier, for: indexPath) as? SimiliarMovieCollectionViewCell,
-            let movieData = movieList else { return SimiliarMovieCollectionViewCell() }
-        
-        let item = movieData.similar.results
-        
-        cell.showCellContents(data: item[indexPath.row])
-        
-        return cell
+        if mode == Mode.similar.rawValue {
+            guard
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SimiliarMovieCollectionViewCell.identifier, for: indexPath) as? SimiliarMovieCollectionViewCell,
+                let movieData = movieList else { return SimiliarMovieCollectionViewCell() }
+            
+            let item = movieData.similar.results
+            
+            cell.showCellContents(data: item[indexPath.row])
+            
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewCell.identifier, for: indexPath) as? VideoCollectionViewCell, let video = videoList else { return VideoCollectionViewCell() }
+         
+            let videoInfo = video.videos.results
+            cell.videoNumberLabel.text = "No.\(indexPath.row + 1)"
+            cell.showCellContents(data: videoInfo[indexPath.row])
+            
+            return cell
+        }
         
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+            return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -103,8 +124,14 @@ extension DispatchGroupViewController: UICollectionViewDataSource {
                 return view }
             
             view.showContentsOnView(data: movie)
-            return view
             
+            if mode == Mode.similar.rawValue {
+                return view
+            } else {
+                view.isHidden = true
+                print(view.frame.size)
+                return view
+            }
         } else {
             fatalError()
         }
@@ -128,10 +155,13 @@ extension DispatchGroupViewController: CollectionViewAttributeProtocol {
         let cellNib = UINib(nibName: SimiliarMovieCollectionViewCell.identifier, bundle: nil)
         collectionView.register(cellNib, forCellWithReuseIdentifier: SimiliarMovieCollectionViewCell.identifier)
         
+        let videoInfoNib = UINib(nibName: VideoCollectionViewCell.identifier, bundle: nil)
+        collectionView.register(videoInfoNib, forCellWithReuseIdentifier: VideoCollectionViewCell.identifier)
+        
         collectionView.register(UINib(nibName: SimilarMovieCollectionReusableView.identifier, bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SimilarMovieCollectionReusableView.identifier)
     }
     
-    func configureCollectionViewLayout() {
+    func configureCollectionViewLayout(width: Double, height: Double) {
         
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 20
@@ -143,9 +173,8 @@ extension DispatchGroupViewController: CollectionViewAttributeProtocol {
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
         layout.scrollDirection = .vertical
         
-        //MARK: - 여기다 헤더 추가해야함.
-        layout.headerReferenceSize = CGSize(width: 300, height: 150)
-        
+        layout.headerReferenceSize = CGSize(width: width, height: height)
+
         collectionView.collectionViewLayout = layout
     }
     

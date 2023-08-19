@@ -18,6 +18,8 @@
 		041AE3E72A899D84007724AE /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041AE3E62A899D84007724AE /* Endpoint.swift */; };
 		041AE3E92A89A265007724AE /* GCDBasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041AE3E82A89A265007724AE /* GCDBasicViewController.swift */; };
 		1789FF172A90EDC40065C0E6 /* SimiliarMovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1789FF152A90EDC40065C0E6 /* SimiliarMovieCollectionViewCell.xib */; };
+		1789FF1A2A90F2250065C0E6 /* VideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1789FF182A90F2250065C0E6 /* VideoCollectionViewCell.swift */; };
+		1789FF1B2A90F2250065C0E6 /* VideoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1789FF192A90F2250065C0E6 /* VideoCollectionViewCell.xib */; };
 		178ACA7F2A8F98360095EF39 /* DispatchGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178ACA7E2A8F98360095EF39 /* DispatchGroupViewController.swift */; };
 		178ACA812A8F99170095EF39 /* TMDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178ACA802A8F99170095EF39 /* TMDBManager.swift */; };
 		178ACA842A8FA0AA0095EF39 /* SimilarMovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178ACA832A8FA0AA0095EF39 /* SimilarMovieModel.swift */; };
@@ -61,6 +63,8 @@
 		041AE3E62A899D84007724AE /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		041AE3E82A89A265007724AE /* GCDBasicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDBasicViewController.swift; sourceTree = "<group>"; };
 		1789FF152A90EDC40065C0E6 /* SimiliarMovieCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimiliarMovieCollectionViewCell.xib; sourceTree = "<group>"; };
+		1789FF182A90F2250065C0E6 /* VideoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewCell.swift; sourceTree = "<group>"; };
+		1789FF192A90F2250065C0E6 /* VideoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoCollectionViewCell.xib; sourceTree = "<group>"; };
 		178ACA7E2A8F98360095EF39 /* DispatchGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchGroupViewController.swift; sourceTree = "<group>"; };
 		178ACA802A8F99170095EF39 /* TMDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBManager.swift; sourceTree = "<group>"; };
 		178ACA832A8FA0AA0095EF39 /* SimilarMovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarMovieModel.swift; sourceTree = "<group>"; };
@@ -170,6 +174,8 @@
 				178ACA802A8F99170095EF39 /* TMDBManager.swift */,
 				178ACA8B2A8FA7BF0095EF39 /* ImageUrl.swift */,
 				178ACAA12A90ECF40095EF39 /* SimilarMovieCollectionReusableView.xib */,
+				1789FF182A90F2250065C0E6 /* VideoCollectionViewCell.swift */,
+				1789FF192A90F2250065C0E6 /* VideoCollectionViewCell.xib */,
 			);
 			path = DispatchGroup;
 			sourceTree = "<group>";
@@ -278,6 +284,7 @@
 			files = (
 				041AE3E22A899D1C007724AE /* .gitignore in Resources */,
 				178ACAA32A90ECF40095EF39 /* SimilarMovieCollectionReusableView.xib in Resources */,
+				1789FF1B2A90F2250065C0E6 /* VideoCollectionViewCell.xib in Resources */,
 				17FF14412A8EF1C700E56701 /* GmarketSansTTFLight.ttf in Resources */,
 				17F933112A8C752D000B2472 /* HeaderPosterCollectionReusableView.xib in Resources */,
 				041AE3D92A899B29007724AE /* LaunchScreen.storyboard in Resources */,
@@ -295,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1789FF1A2A90F2250065C0E6 /* VideoCollectionViewCell.swift in Sources */,
 				041AE3D12A899B28007724AE /* ViewController.swift in Sources */,
 				041AE3CD2A899B28007724AE /* AppDelegate.swift in Sources */,
 				17F933222A8DAB8C000B2472 /* LottoManager.swift in Sources */,

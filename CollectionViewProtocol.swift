@@ -6,8 +6,8 @@
 //
 
 import Foundation
-
+@objc
 protocol CollectionViewAttributeProtocol {
     func configureCollectionView()
-    func configureCollectionViewLayout()
+    @objc optional func configureCollectionViewLayout()
 }

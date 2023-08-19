@@ -43,9 +43,10 @@ struct VideoInfo: Codable {
     let type: String
     let official: Bool
     let publishedAt: String
+    let key: String
 
     enum CodingKeys: String, CodingKey {
-        case name, site, type, official
+        case name, site, type, official, key
         case publishedAt = "published_at"
     }
 }
