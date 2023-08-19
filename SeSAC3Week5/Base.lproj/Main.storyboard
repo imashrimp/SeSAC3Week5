@@ -107,7 +107,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tQV-cE-pvF">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="693"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="H6U-To-Y9j">
                                     <size key="itemSize" width="128" height="128"/>
@@ -126,23 +126,40 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="csU-6g-zyo">
+                                <rect key="frame" x="11" y="760" width="371" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="UlK-VR-pgL"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentTapped:" destination="VLj-eM-2h6" eventType="valueChanged" id="5pj-VR-3Cs"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="a8H-fg-UyI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="a8H-fg-UyI" firstAttribute="bottom" secondItem="tQV-cE-pvF" secondAttribute="bottom" id="1zZ-JX-vUl"/>
+                            <constraint firstItem="a8H-fg-UyI" firstAttribute="bottom" secondItem="csU-6g-zyo" secondAttribute="bottom" constant="8" id="37V-bQ-bBH"/>
+                            <constraint firstItem="a8H-fg-UyI" firstAttribute="trailing" secondItem="csU-6g-zyo" secondAttribute="trailing" constant="11" id="4S4-Cd-FFj"/>
+                            <constraint firstItem="csU-6g-zyo" firstAttribute="leading" secondItem="a8H-fg-UyI" secondAttribute="leading" constant="11" id="BuG-J6-uSE"/>
                             <constraint firstItem="a8H-fg-UyI" firstAttribute="trailing" secondItem="tQV-cE-pvF" secondAttribute="trailing" id="DBp-5p-GHm"/>
                             <constraint firstItem="tQV-cE-pvF" firstAttribute="top" secondItem="a8H-fg-UyI" secondAttribute="top" id="JzE-mM-jTK"/>
                             <constraint firstItem="tQV-cE-pvF" firstAttribute="leading" secondItem="a8H-fg-UyI" secondAttribute="leading" id="We8-yE-sAA"/>
+                            <constraint firstItem="csU-6g-zyo" firstAttribute="top" secondItem="tQV-cE-pvF" secondAttribute="bottom" constant="8" id="aeW-Bn-sKQ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="tQV-cE-pvF" id="FLN-lv-SuK"/>
+                        <outlet property="similiarAndVideoSegment" destination="csU-6g-zyo" id="VVF-sD-9Bh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ysi-B2-rKE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="674"/>
+            <point key="canvasLocation" x="130.53435114503816" y="673.94366197183103"/>
         </scene>
         <!--Basic View Controller-->
         <scene sceneID="79a-ML-9tP">

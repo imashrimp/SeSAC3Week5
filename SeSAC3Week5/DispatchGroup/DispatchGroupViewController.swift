@@ -5,28 +5,51 @@
 //  Created by 권현석 on 2023/08/18.
 //
 
-//MARK: - prefetch랑 pagenation 써보자
 
 import UIKit
 
 class DispatchGroupViewController: UIViewController {
     
+    var mode: String?
+    
     var movieList: SimilarMovie?
+    var videoList: Movie?
     
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var similiarAndVideoSegment: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureCollectionView()
         configureCollectionViewLayout()
-        
+        configureSegment()
+
         callRequest()
     }
     
+    
+    @IBAction func segmentTapped(_ sender: UISegmentedControl) {
+        mode = similiarAndVideoSegment.titleForSegment(at: sender.selectedSegmentIndex)
+        self.collectionView.reloadSections([0])
+    }
+    
     func callRequest() {
+        let group = DispatchGroup()
+        
+        group.enter()
         TMDBManager.shared.callRequestSimilarMovie(movieID: 150689) { movie in
             self.movieList = movie
+            group.leave()
+        }
+        
+        group.enter()
+        TMDBManager.shared.callRequestMovieVideos(MovieId: 150689) { videos in
+            self.videoList = videos
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
             self.collectionView.reloadSections([0])
         }
     }
@@ -44,16 +67,13 @@ extension DispatchGroupViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SimiliarMovieCollectionViewCell.identifier, for: indexPath) as? SimiliarMovieCollectionViewCell else { return SimiliarMovieCollectionViewCell() }
-        
-        guard let movieData = movieList else { return SimiliarMovieCollectionViewCell() }
+        guard
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SimiliarMovieCollectionViewCell.identifier, for: indexPath) as? SimiliarMovieCollectionViewCell,
+            let movieData = movieList else { return SimiliarMovieCollectionViewCell() }
         
         let item = movieData.similar.results
         
         cell.showCellContents(data: item[indexPath.row])
-        print("=====")
-        print(indexPath)
-        print("=====")
         
         return cell
         
@@ -87,13 +107,19 @@ extension DispatchGroupViewController: UICollectionViewDataSource {
             
         } else {
             fatalError()
-//            return UICollectionReusableView()
         }
     }
-    
 }
 
 extension DispatchGroupViewController: CollectionViewAttributeProtocol {
+    
+    func configureSegment() {
+        similiarAndVideoSegment.setTitle(Mode.similar.rawValue, forSegmentAt: 0)
+        similiarAndVideoSegment.setTitle(Mode.video.rawValue, forSegmentAt: 1)
+        similiarAndVideoSegment.selectedSegmentTintColor = .systemPink
+        
+        mode = similiarAndVideoSegment.titleForSegment(at: 0)
+    }
     
     func configureCollectionView() {
         collectionView.delegate = self
@@ -109,7 +135,7 @@ extension DispatchGroupViewController: CollectionViewAttributeProtocol {
         
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 20
-        let width = (UIScreen.main.bounds.width - ( 20 * 3)) / 2
+        let width = (UIScreen.main.bounds.width - ( spacing * 3)) / 2
         
         layout.itemSize = CGSize(width: width, height: width)
         layout.minimumLineSpacing = spacing

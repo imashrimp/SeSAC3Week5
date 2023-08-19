@@ -29,4 +29,20 @@ struct TMDBManager {
                 completionHandler(value)
             }
     }
+    
+    func callRequestMovieVideos(MovieId: Int, completionHandler: @escaping (Movie) -> Void) {
+        
+        var components = URLComponents(string: "https://api.themoviedb.org/3/movie/\(MovieId)")
+        let apiKey = URLQueryItem(name: "api_key", value: Key.tmdb)
+        let appendToResponse = URLQueryItem(name: "append_to_response", value: "videos")
+        components?.queryItems = [apiKey, appendToResponse]
+        
+        guard let url = components?.url else { return }
+        
+        AF.request(url, method: .get).validate()
+            .responseDecodable(of: Movie.self) { response in
+                guard let value = response.value else { return }
+                completionHandler(value)
+            }
+    }
 }
