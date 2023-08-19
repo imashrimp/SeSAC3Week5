@@ -7,6 +7,10 @@
 
 import Foundation
 
-struct ImageUrl {
-    static let head = "https://www.themoviedb.org/t/p/w1280"
+class ImageUrl {
+    static let shared = ImageUrl()
+    
+    let head = "https://www.themoviedb.org/t/p/w1280"
+    
+    private init() { }
 }

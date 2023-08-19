@@ -33,7 +33,7 @@ class SimiliarMovieCollectionViewCell: UICollectionViewCell {
             return
         }
         
-        guard let imageURL = URL(string: ImageUrl.head + posterUrl) else { return }
+        guard let imageURL = URL(string: ImageUrl.shared.head + posterUrl) else { return }
         posterImageView.kf.setImage(with: imageURL)
     }
 

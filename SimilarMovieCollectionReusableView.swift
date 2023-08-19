@@ -28,7 +28,7 @@ class SimilarMovieCollectionReusableView: UICollectionReusableView {
         
         movieTitleLabel.text = data.title
         
-        guard let imageUrl = URL(string: ImageUrl.head + data.backdropPath) else { return }
+        guard let imageUrl = URL(string: ImageUrl.shared.head + data.backdropPath) else { return }
         backPosterImageView.kf.setImage(with: imageUrl)
     }
     

@@ -24,7 +24,7 @@ class DispatchGroupViewController: UIViewController {
         configureCollectionView()
         configureCollectionViewLayout(width: 300, height: 150)
         configureSegment()
-
+        
         callRequest()
     }
     
@@ -90,18 +90,17 @@ extension DispatchGroupViewController: UICollectionViewDataSource {
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewCell.identifier, for: indexPath) as? VideoCollectionViewCell, let video = videoList else { return VideoCollectionViewCell() }
-         
+            
             let videoInfo = video.videos.results
             cell.videoNumberLabel.text = "No.\(indexPath.row + 1)"
             cell.showCellContents(data: videoInfo[indexPath.row])
             
             return cell
         }
-        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-            return 1
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -115,24 +114,20 @@ extension DispatchGroupViewController: UICollectionViewDataSource {
                             SimilarMovieCollectionReusableView.identifier,
                         for: indexPath
                     ) as? SimilarMovieCollectionReusableView
-            else { return UICollectionReusableView() }
-
+            else {
+                //MARK: - 여기처럼 빈 리유저블뷰 뱉으면 안됨 디큐 리유저블은 유효한 뷰만 뱉어내거든
+                return UICollectionReusableView()
+            }
+            
             guard let movie = movieList else {
-                
-                view.isHidden = true
-                
-                return view }
-            
-            view.showContentsOnView(data: movie)
-            
-            if mode == Mode.similar.rawValue {
-                return view
-            } else {
-                view.isHidden = true
-                print(view.frame.size)
+                //MARK: - 여기도 다른거 뱉어내게
                 return view
             }
+            
+            view.showContentsOnView(data: movie)
+            return view
         } else {
+            //MARK: - 여기도 다른거 뱉어내게 해보자
             fatalError()
         }
     }
@@ -174,7 +169,7 @@ extension DispatchGroupViewController: CollectionViewAttributeProtocol {
         layout.scrollDirection = .vertical
         
         layout.headerReferenceSize = CGSize(width: width, height: height)
-
+        
         collectionView.collectionViewLayout = layout
     }
     
